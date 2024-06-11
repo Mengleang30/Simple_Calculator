@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let operand1 = '';
     let operand2 = '';
 
+    const clickSound = new Audio('audiomass-output.mp3'); // Load the sound file
+
+    const playSound = () => {
+        clickSound.currentTime = 0; // Rewind to start
+        clickSound.play(); // Play the sound
+    }
+
     const updateDisplay = (value) => {
         display.innerText = value;
     }
@@ -15,11 +22,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         operand1 = '';
         operand2 = '';
         updateDisplay('0');
+        playSound();
     }
 
     const deleteLast = () => {
         currentInput = currentInput.slice(0, -1);
         updateDisplay(currentInput || '0');
+        playSound();
     }
 
     const setOperand = (value) => {
@@ -31,6 +40,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             currentInput += value;
         }
         updateDisplay(currentInput);
+        playSound();
     }
 
     const setOperator = (op) => {
@@ -38,6 +48,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             operator = op;
             currentInput += ` ${op} `;
             updateDisplay(currentInput);
+            playSound();
         }
     }
 
@@ -72,6 +83,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         operand2 = '';
         operator = '';
         currentInput = result.toString();
+        playSound();
     }
 
     document.getElementById('btn_clear').addEventListener('click', clearAll);
